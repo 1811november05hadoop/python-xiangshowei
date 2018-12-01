@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 import re
+import math
+
 '''
 Revature is building a new API! This API contains functions for validating data, 
 solving problems, and encoding data. 
@@ -64,19 +66,24 @@ def main():
 	print(is_armstrong_number(154))
 	print()
 	
-	print("---Testing get_prime_factors()---")
-	print()
-	print()
-	
+	print("---Testing calculate_prime_factors()---")
+	try:
+		print(calculate_prime_factors(1))
+	except AssertionError:
+		print("1 is not a prime number")
+	print(calculate_prime_factors(2))
+	print(calculate_prime_factors(49))
+	print()	
+
 	print("---Testing is_pangram()---")
+	print(is_pangram("The quick brown fox jumps over the lazy dog!@#$%^&"))
 	print()
+
+	print("---Testing sort()---")
+	print(sort([2,4,5,1,3,1]))
 	print()
 	
-	print("---Testing merge_sort()---")
-	print()
-	print()
-	
-	print("---Testing rotate_cipher_encode()---")
+	print("---Testing rotate()---")
 	print()
 	print()
 	
@@ -226,6 +233,133 @@ def is_armstrong_number(number):
 
 		
 		return digit_sum == number
+'''
+6. Compute the prime factors of a given natural number.
+
+A prime number is only evenly divisible by itself and 1.
+ 
+Note that 1 is not a prime number.
+
+param: int
+return: list
+'''
+def calculate_prime_factors(number):
+	assert (type(number) == int)
 		
+	assert number != 1
+	
+	prime_factors = []
+	if number == 2 or number == 3:
+		prime_factors.append(number)
+		return prime_factors
+	else:
+		num_is_even = number % 2 == 0
+		
+		if num_is_even:
+			#get all 2's that make up the prime factorization
+			while num_is_even:
+				prime_factors.append(2)
+				number = number / 2
+				#parity of the expression needs to be updated because the value of number is being updated
+				num_is_even = number % 2 == 0
+		
+		#getting the odd prime factors
+		for i in range (3, int(math.sqrt(number) + 1), 2):
+			while number % i == 0:
+				prime_factors.append(i)
+				number = number / i
+		
+		#getting the last prime factor if applicable
+		if number > 2:
+			prime_factors.append(int(number))
+		
+		return prime_factors
+		
+'''
+7. Determine if a sentence is a pangram. A pangram (Greek: παν γράμμα, pan
+gramma, "every letter") is a sentence using every letter of the alphabet at
+least once. The best known English pangram is:
+
+The quick brown fox jumps over the lazy dog.
+ 
+The alphabet used consists of ASCII letters a to z, inclusive, and is case
+insensitive. Input will not contain non-ASCII symbols.
+ 
+param: str
+return: bool
+'''
+def is_pangram(sentence):
+	assert (type(sentence) == str)
+
+	alphabetSet = set()
+	
+	for ch in sentence:
+		if ch.isalpha():
+			if ch.isupper():
+				ch = ch.lower()
+			alphabetSet.add(ch)
+	
+	return len(alphabetSet) == 26
+'''
+8. Sort list of integers.
+f([2,4,5,1,3,1]) = [1,1,2,3,4,5]
+
+Rules:
+- Do NOT sort it with .sort() or sorted(list) or any built-in tools.
+
+param: list
+return: list
+'''
+def sort(numbers):
+	assert (type(numbers) == list)
+
+	for i in range(0, len(numbers)):
+		min_index = i
+		for j in range (i + 1, len(numbers)):
+			#find the index of the smallest number
+			if numbers[j] <= numbers[min_index]:
+				min_index = j
+
+		#swap it to the fron of the list but only if the element is out of order to avoid unncessary swap executions
+		if(min_index != i):
+			swap(numbers, i, min_index)
+	
+	return numbers
+
+def swap(array, index1, index2):
+	temp = array[index1]
+	array[index1] = array[index2]
+	array[index2] = temp 
+'''
+9. Create an implementation of the rotational cipher, also sometimes called the Caesar cipher.
+
+The Caesar cipher is a simple shift cipher that relies on transposing all the
+letters in the alphabet using an integer key between 0 and 26. Using a key of
+0 or 26 will always yield the same output due to modular arithmetic. The
+letter is shifted for as many values as the value of the key.
+ 
+The general notation for rotational ciphers is ROT + <key>. 
+The most commonly used rotational cipher is ROT13.
+	  
+A ROT13 on the Latin alphabet would be as follows: 
+- Plain: abcdefghijklmnopqrstuvwxyz
+- Cipher: nopqrstuvwxyzabcdefghijklm  
+
+It is stronger than the Atbash cipher because it has 27 possible keys, and 25 usable keys.
+Ciphertext is written out in the same formatting as the input including spaces and punctuation. 
+
+Examples: 
+- ROT5 omg -> trl 
+- ROT0 c -> c 
+- ROT26 Cool -> Cool 
+- ROT13 The quick brown fox jumps over the lazy dog. -> Gur dhvpx oebja sbk whzcf bire gur ynml qbt. 
+- ROT13 Gur dhvpx oebja sbk whzcf bire gur ynml qbt. -> The quick brown fox jumps over the lazy dog.
+
+param: int, str
+return: str
+'''
+def rotate(key, string):
+	print("")
+
 if __name__ == "__main__":
 	main()
