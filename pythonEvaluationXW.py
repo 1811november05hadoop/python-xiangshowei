@@ -346,7 +346,7 @@ A ROT13 on the Latin alphabet would be as follows:
 - Cipher: nopqrstuvwxyzabcdefghijklm  
 
 It is stronger than the Atbash cipher because it has 27 possible keys, and 25 usable keys.
-Ciphertext is written out in the same formatting as the input including spaces and punctuation. 
+Cipher text is written out in the same formatting as the input including spaces and punctuation. 
 
 Examples: 
 - ROT5 omg -> trl 
