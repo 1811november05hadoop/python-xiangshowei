@@ -84,7 +84,9 @@ def main():
 	print()
 	
 	print("---Testing rotate()---")
-	print()
+	print(rotate(26, "The quick brown fox jumps over the lazy dog."))
+	print(rotate(13, "The quick brown fox jumps over the lazy dog."))
+	print(rotate(53, "The quick brown fox jumps over the lazy dog."))
 	print()
 	
 	print("---Testing store_even_and_odd_numbers_in_file()---")
@@ -104,6 +106,7 @@ def reverse(string):
 	assert type(string) == str
 	
 	reversed_string = []
+
 	for index in range(len(string) - 1, -1, -1):
 		reversed_string.append(string[index])
 	
@@ -127,6 +130,7 @@ def acronym(phrase):
 
 	acronym = []
 	words = re.split("[ -]", phrase)
+
 	for word in words:
 		acronym.append(word[0].capitalize())
 	
@@ -149,10 +153,13 @@ def whichTriangle(sideOne, sideTwo, sideThree):
 	assert type(sideThree) == float
 
 	triangleType = None
+	
 	if sideOne == sideTwo and sideOne == sideThree:
 		triangleType = "equilateral"
+
 	elif sideOne != sideTwo and sideOne != sideThree and sideTwo != sideThree:
 		triangleType = "scalene"
+
 	else: 
 		triangleType = "isosceles"
 
@@ -191,16 +198,22 @@ def scrabble(word):
 		
 			if ch in "aeioulnrst":
 				score += 1
+
 			elif ch in "dg":
 				score += 2
+
 			elif ch in "bcmp":
 				score +=3
+
 			elif ch in "fhvwy":
 				score += 4
+
 			elif ch == "k":
 				score += 5
+
 			elif ch in "jx":
 				score += 8
+
 			elif ch in "qz":
 				score += 10
 	return score
@@ -224,13 +237,12 @@ def is_armstrong_number(number):
 		return True
 	else:
 		digit_sum = 0
-		#converts an int into a list of int; get the individual digits of the number
+		#get the individual digits of the number
 		digits = [int(num) for num in str(number)]
 		num_digits = len(digits)
 		
 		for digit in digits:
 			digit_sum += digit ** num_digits
-
 		
 		return digit_sum == number
 '''
@@ -251,6 +263,7 @@ def calculate_prime_factors(number):
 	prime_factors = []
 	if number == 2 or number == 3:
 		prime_factors.append(number)
+		
 		return prime_factors
 	else:
 		num_is_even = number % 2 == 0
@@ -315,12 +328,14 @@ def sort(numbers):
 
 	for i in range(0, len(numbers)):
 		min_index = i
+
 		for j in range (i + 1, len(numbers)):
 			#find the index of the smallest number
 			if numbers[j] <= numbers[min_index]:
 				min_index = j
 
-		#swap it to the fron of the list but only if the element is out of order to avoid unncessary swap executions
+		#swap element at min_index to the front of the list 
+		#but only if the element is out of order to avoid unncessary swap executions
 		if(min_index != i):
 			swap(numbers, i, min_index)
 	
@@ -359,6 +374,58 @@ param: int, str
 return: str
 '''
 def rotate(key, string):
+	assert (type(key) == int)
+	assert (type(string) == str)
+
+	if key == 0 or key == 26:
+		return string
+	else:
+		while key > 26:
+			key = key - 26
+		
+		alphabet = "abcdefghijglmnopqrstuvwxyz"
+		encoded_string = []
+		for ch in string:
+			if ch.isalpha():
+				replacement_character_index = 0
+				replacement_character = ""
+
+				if ch.isupper():
+					# ASCII math done via the ord() function
+					
+					# Extracting the correct character from the alphabet String
+					# To make sure the index of character we're trying to extract from the 
+					# alphabet String stays within bounds, the numerical value 
+					# of the character of "A" or "a" needs to be subtracted depending on its case
+					# from the character being examined
+					replacement_character_index = ord(ch) - ord("A") + key
+					
+					if replacement_character_index >= len(alphabet):
+						replacement_character_index = replacement_character_index - len(alphabet)
+					replacement_character = alphabet[replacement_character_index].upper()
+
+				else:
+					replacement_character_index = ord(ch) - ord("a") + key
+
+					if replacement_character_index >= len(alphabet):
+						replacement_character_index = replacement_character_index - len(alphabet)
+					replacement_character = alphabet[replacement_character_index]
+				
+				encoded_string.append(replacement_character)
+			
+			#add letters as is
+			else:
+				encoded_string.append(ch)
+
+		return "".join(encoded_string)
+'''	
+10. Take 10 numbers as input from the user and store all the even numbers in a file called even.txt and
+the odd numbers in a file called odd.txt.
+
+param: none; receive user input from keyboard
+return: nothing
+'''
+def evenAndOdds():
 	print("")
 
 if __name__ == "__main__":
