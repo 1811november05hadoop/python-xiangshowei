@@ -23,11 +23,9 @@ up since you can be asked.
 
 6) Plagiarism is a serious issue, avoid it at all costs.
 
-7) Don't import external libraries which are not python native
+7) Don't import external libraries which are not suported by Python natively.
 
-8) Don't change the parameters or returns, follow the directions.
-
-9) Assignment is optional, but totally recommend to achieve before Monday for practice.
+8) Don't change the parameters or return types, follow the directions.
 
 Happy Scripting!
 
@@ -38,6 +36,7 @@ Happy Scripting!
 Use the main function for testing purposes and to show me results for all functions.
 '''
 def main():
+	print()
 
 '''
 1. Reverse a String. Example: reverse("example"); -> "elpmaxe"
@@ -50,6 +49,7 @@ param: str
 return: str
 '''
 def reverse(string):
+	print()
 
 '''
 2. Convert a phrase to its acronym. Techies love their TLA (Three Letter
@@ -59,28 +59,35 @@ long name like Portable Network Graphics to its acronym (PNG).
 param: str
 return: str
 '''
-def acronym(phrase):
+def acronym(phrase):	
+	print()	
 
 '''
-3. Determine if a triangle is equilateral, isosceles, or scalene. An
-equilateral triangle has all three sides the same length. An isosceles
-triangle has at least two sides the same length. (It is sometimes specified
+3. Determine if a triangle is equilateral, isosceles, or scalene. 
+- An equilateral triangle has all three sides the same length. 
+- An isosceles triangle has at least two sides the same length. (It is sometimes specified
 as having exactly two sides the same length, but for the purposes of this
-exercise we'll say at least two.) A scalene triangle has all sides of
-different lengths.
+exercise we'll say at least two.) 
+- A scalene triangle has all sides of different lengths.
 
 param: float, float, float
 return: str -> 'equilateral', 'isoceles', 'scalene'
 '''
-def whichTriangle(sideOne, sideTwo, sideThree):
-
+def whichTriangle(sideOne, sideTwo, sideThree): 
+	print()
 
 '''
 4. Given a word, compute the scrabble score for that word.
 
---Letter Values-- Letter Value A, E, I, O, U, L, N, R, S, T = 1; D, G = 2; B,
-C, M, P = 3; F, H, V, W, Y = 4; K = 5; J, X = 8; Q, Z = 10; Examples
-"cabbage" should be scored as worth 14 points:
+--Letter Values-- 
+A, E, I, O, U, L, N, R, S, T = 1;
+ D, G = 2; 
+B, C, M, P = 3; 
+F, H, V, W, Y = 4; 
+K = 5; J, X = 8; 
+Q, Z = 10; 
+
+Example: "cabbage" should be scored as worth 14 points:
 
 3 points for C, 1 point for A, twice 3 points for B, twice 2 points for G, 1
 point for E And to total:
@@ -91,7 +98,7 @@ param: str
 return: int
 '''
 def scrabble(word):
-
+	print()
 '''
 5. An Armstrong number is a number that is the sum of its own digits each
 raised to the power of the number of digits.
@@ -108,7 +115,7 @@ param: int
 return: bool
 '''
 def armstrong(number):
-
+	print()
 '''
 6. Compute the prime factors of a given natural number.
 
@@ -119,7 +126,8 @@ Note that 1 is not a prime number.
 param: int
 return: list
 '''
-def primeFactors(number)
+def primeFactors(number):
+	print()
 
 '''
 7. Determine if a sentence is a pangram. A pangram (Greek: παν γράμμα, pan
@@ -135,6 +143,7 @@ param: str
 return: bool
 '''
 def pangram(sentence):
+	print()
 
 '''
 8. Sort list of integers.
@@ -148,7 +157,7 @@ param: list
 return: list
 '''
 def sort(numbers):
-
+	print()
 '''
 9. Create an implementation of the rotational cipher, also sometimes called
 the Caesar cipher.
@@ -179,8 +188,9 @@ param: int, str
 return: str
 '''
 def rotate(key, string):
-
+	print()
 '''
+
 10. Take 10 numbers as input from the user and store all the even numbers in a file called even.txt and
 the odd numbers in a file called odd.txt.
 
@@ -188,6 +198,7 @@ param: none, from the keyboard
 return: nothing
 '''
 def evenAndOdds():
+	print()
 
-if __name__ == "__main__"
-    main()
+if __name__ == "__main__":
+	main()

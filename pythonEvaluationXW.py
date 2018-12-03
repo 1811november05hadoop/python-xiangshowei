@@ -2,6 +2,7 @@
 
 import re
 import math
+import os
 
 '''
 Revature is building a new API! This API contains functions for validating data, 
@@ -45,7 +46,7 @@ def main():
 
 	print("---Testing acronym()---")
 	print(acronym("Portable Network Graphic"))
-	print(acronym("Deoxyribo-nucleic acid"))
+	print(acronym("Complementary metal-oxide semiconductor"))
 	print()
 
 	print("---Testing whichTriangle()---")
@@ -89,8 +90,8 @@ def main():
 	print(rotate(53, "The quick brown fox jumps over the lazy dog."))
 	print()
 	
-	print("---Testing store_even_and_odd_numbers_in_file()---")
-	print()
+	print("---Testing store_even_and_odd_numbers()---")
+	store_even_and_odd_numbers()
 	print()
 '''
 1. Reverse a String. Example: reverse("example"); -> "elpmaxe"
@@ -385,6 +386,7 @@ def rotate(key, string):
 		
 		alphabet = "abcdefghijglmnopqrstuvwxyz"
 		encoded_string = []
+
 		for ch in string:
 			if ch.isalpha():
 				replacement_character_index = 0
@@ -393,7 +395,8 @@ def rotate(key, string):
 				if ch.isupper():
 					# ASCII math done via the ord() function
 					
-					# Extracting the correct character from the alphabet String
+					# Extracting the correct character from the alphabet String 
+					# and replacing it with its corresponding character
 					# To make sure the index of character we're trying to extract from the 
 					# alphabet String stays within bounds, the numerical value 
 					# of the character of "A" or "a" needs to be subtracted depending on its case
@@ -413,20 +416,57 @@ def rotate(key, string):
 				
 				encoded_string.append(replacement_character)
 			
-			#add letters as is
+			#add non-letters as is
 			else:
 				encoded_string.append(ch)
 
 		return "".join(encoded_string)
+
 '''	
-10. Take 10 numbers as input from the user and store all the even numbers in a file called even.txt and
+10. Take 10 numbers as input from the user 
+and store all the even numbers in a file called even.txt and
 the odd numbers in a file called odd.txt.
 
 param: none; receive user input from keyboard
-return: nothing
+return: nothing 
 '''
-def evenAndOdds():
-	print("")
+def store_even_and_odd_numbers():
+	# open() will check if the file already exists.
+	# If "w" mode is selected, the existig file will be truncated
+	# and the first write() functional call will overwrite the existing file
+	# while subsequent write() calls will append to file 
 
+	# Note: if using ## with open("file_name", "w") as variable_name: ## 
+	# the write() call will close the file; use open() if writing to a file
+	# multiple times and close the file explictly when done
+	even_number_file = open("evenNumbers.txt", "w")
+	odd_number_file = open("oddNumbers.txt", "w")
+
+	print("Please enter a number: ")
+	start_counter = 1
+	stop_counter = 10
+	while start_counter <= stop_counter:		
+		user_input = input()
+
+		if type(int(user_input)) != int:
+			raise ValueError
+
+		else:
+			number = int(user_input)
+		  	
+			if number % 2 == 0:
+				even_number_file.write(str(number) + "\n")
+			
+			else:
+				odd_number_file.write(str(number) + "\n")
+			
+		start_counter = start_counter + 1
+
+	str(even_number_file.seek(0,2)).rstrip()
+	str(odd_number_file.seek(0,2)).rstrip()
+
+	even_number_file.close()
+	odd_number_file.close()
+	
 if __name__ == "__main__":
 	main()
